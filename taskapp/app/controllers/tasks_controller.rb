@@ -20,6 +20,13 @@ class TasksController < ApplicationController
     redirect_to project_path(params[:project_id])
   end
 
+  def toggle
+    # 「viewを使わない」という設定
+    render nothing: true
+    @task = Task.find(params[:id])
+    @task.done = !@task.done
+    @task.save
+  end
   private
     # for filtering
     def task_params
